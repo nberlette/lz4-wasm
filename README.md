@@ -44,7 +44,6 @@ const compressed = lz4.compress(data);
 console.assert(compressed.length === 1644878); // OK
 
 const decompressed = lz4.decompress(compressed);
-
 console.assert(decompressed.length === data.length); // OK
 console.assert(decompressed.every((v, i) => v === data[i])); // OK
 ```

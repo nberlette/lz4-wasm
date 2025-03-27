@@ -5,11 +5,11 @@
   "author": {
     "name": "Nicholas Berlette",
     "email": "nick@berlette.com",
-    "url": "https://github.com/nberlette/lz4#readme"
+    "url": "https://github.com/nberlette/lz4-wasm#readme"
   },
   "exports": "./mod.ts",
   "publish": {
     "include": ["**/*.ts", "**/*.js*", "**/*.md", "LICENSE"],
-    "exclude": ["**/*.test.*", "**/*.bench.*", "**/.*", "!lib"]
+    "exclude": ["**/.*", "!lib"]
   }
 }
