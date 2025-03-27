@@ -1,0 +1,10 @@
+/target
+/lib
+.DS_Store
+.Spotlight-V100
+.Trashes
+node_modules
+vendor
+.cache
+.deno
+.npm

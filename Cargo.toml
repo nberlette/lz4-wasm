@@ -1,0 +1,27 @@
+[package]
+  name    = "lz4-wasm"
+  version = "0.1.0"
+  authors = ["Nick Berlette <nick@berlette.com>"]
+  edition = "2024"
+
+[lib]
+  name       = "lz4"
+  path       = "src/lib.rs"
+  crate-type = ["cdylib"]
+
+[features]
+  default    = ["alloc", "compress", "decompress"]
+  alloc      = ["lol_alloc"]
+  compress   = []
+  decompress = []
+  mt         = ["alloc"]
+
+[dependencies]
+  lz4-compression = "=0.7.0"
+  wasm-bindgen    = { version = "=0.2.100", default-features = false }
+  lol_alloc       = { version = "=0.4.1", optional = true }
+
+[profile.release]
+  lto       = true
+  opt-level = "s"     # we build for speed round these parts
+  panic     = "abort"
