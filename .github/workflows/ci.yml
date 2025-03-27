@@ -1,0 +1,76 @@
+name: CI
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - "*"
+    paths-ignore:
+      - .github/**
+      - .gitignore
+      - .vscode/**
+      - ./*.md
+      - LICENSE
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish to JSR?
+        type: boolean
+        default: false
+        required: true
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      id-token: write # required for deno publish
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        deno: [canary]
+    steps:
+      - name: setup repo
+        uses: actions/checkout@v4
+
+      - name: setup deno
+        uses: denoland/setup-deno@v2
+        with:
+          # currently this is always canary
+          deno-version: ${{ matrix.deno }}
+
+      - name: setup rust
+        uses: dsherret/rust-toolchain-file@v1
+
+      - name: build wasm
+        run: deno run -Aq jsr:@deno/wasmbuild@0.19.1 --inline
+
+      - name: deno test
+        run: deno test -A --no-check=remote --parallel --doc
+
+      # only need to run this once
+      - if: runner.os == 'Linux'
+        name: deno lint
+        run: deno lint
+
+      # only need to run this once
+      - if: runner.os == 'Linux'
+        name: deno fmt --check
+        run: deno fmt --check
+
+      # only publish once, if on a tag or if manually triggered
+      - if: |
+          runner.os == 'Linux' && (
+            (
+              github.event_name == 'push' &&
+              startsWith(github.ref, 'refs/tags/')
+            ) || (
+              github.event_name == 'workflow_dispatch' &&
+              github.event.inputs.publish == 'true'
+            )
+          )
+        name: publish to jsr
+        run: deno publish --dry-run && deno publish
