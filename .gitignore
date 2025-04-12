@@ -8,3 +8,4 @@ vendor
 .cache
 .deno
 .npm
+lib-*

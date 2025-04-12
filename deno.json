@@ -8,8 +8,14 @@
     "url": "https://github.com/nberlette/lz4-wasm#readme"
   },
   "exports": "./mod.ts",
+  "tasks": {
+    "test": "deno test -A --no-check=remote --parallel --doc --clean --coverage=.coverage --permit-no-files",
+    "lcov": "deno coverage --lcov --output=lcov.info .coverage",
+    "build": "deno run -Aq ./scripts/build.ts",
+    "check": "deno run build && deno fmt --check && deno lint && deno run test"
+  },
   "publish": {
     "include": ["**/*.ts", "**/*.js*", "**/*.md", "LICENSE"],
-    "exclude": ["**/.*", "!lib"]
+    "exclude": ["**/.*", "!lib", "**/*.test.*", "**/*.bench.*"]
   }
 }

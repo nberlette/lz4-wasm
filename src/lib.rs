@@ -4,6 +4,7 @@
 
 extern crate alloc;
 use alloc::boxed::Box;
+use alloc::string::ToString;
 use alloc::vec::Vec;
 use wasm_bindgen::prelude::*;
 
@@ -32,7 +33,7 @@ static ALLOCATOR: LockedAllocator<FreeListAllocator> =
 ///
 /// The output is a byte array containing the compressed data.
 pub fn compress(input: Box<[u8]>) -> Vec<u8> {
-  ::lz4_compression::prelude::compress(&mut input.as_ref())
+  ::lz4_flex::block::compress_prepend_size(&input.as_ref())
 }
 
 #[wasm_bindgen]
@@ -41,6 +42,12 @@ pub fn compress(input: Box<[u8]>) -> Vec<u8> {
 ///
 /// The input data is expected to be a byte array.
 /// The output is a byte array containing the decompressed data.
-pub fn decompress(input: Box<[u8]>) -> Vec<u8> {
-  ::lz4_compression::prelude::decompress(&mut input.as_ref()).unwrap()
+pub fn decompress(input: Box<[u8]>) -> Result<Vec<u8>, JsValue> {
+  ::lz4_flex::block::decompress_size_prepended(&input.as_ref())
+    .map_err(|e| JsValue::from_str(&e.to_string()))
+}
+
+#[panic_handler]
+fn panic(_info: &core::panic::PanicInfo) -> ! {
+  loop {} // no-op panic handler for WebAssembly
 }
