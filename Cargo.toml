@@ -1,6 +1,6 @@
 [package]
   name    = "lz4-wasm"
-  version = "0.1.0"
+  version = "0.2.0"
   authors = ["Nick Berlette <nick@berlette.com>"]
   edition = "2024"
 
@@ -17,11 +17,14 @@
   mt         = ["alloc"]
 
 [dependencies]
-  lz4-compression = "=0.7.0"
-  wasm-bindgen    = { version = "=0.2.100", default-features = false }
-  lol_alloc       = { version = "=0.4.1", optional = true }
+  lz4_flex = { version = "=0.9.2", default-features = false, features = [
+    "checked-decode",
+  ] }
+  wasm-bindgen = { version = "=0.2.100", default-features = false }
+  lol_alloc = { version = "=0.4.1", optional = true }
 
 [profile.release]
-  lto       = true
-  opt-level = "s"     # we build for speed round these parts
-  panic     = "abort"
+  lto           = true
+  codegen-units = 1
+  opt-level     = "s"     # we build for speed round these parts
+  panic         = "abort"
