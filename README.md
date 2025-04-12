@@ -82,8 +82,8 @@ running in a browser environment without needing to install anything.
 #### Using an [import map]
 
 Leveraging an [import map] can help simplify your imports, allowing the same
-code to be re-used across different environments. This is especially useful
-for projects that may be using different package managers or module loaders.
+code to be re-used across different environments. This is especially useful for
+projects that may be using different package managers or module loaders.
 
 ```html
 <script type="importmap">
@@ -102,8 +102,8 @@ for projects that may be using different package managers or module loaders.
 > [!TIP]
 >
 > You can also specify the `"imports"` and `"scopes"` properties in a
-> `deno.json` file, allowing you to share the same import map between
-> browser and Deno environments.
+> `deno.json` file, allowing you to share the same import map between browser
+> and Deno environments.
 >
 > **[→ Learn more about `deno.json`]**
 
@@ -133,8 +133,8 @@ The compressed data, also represented as a `Uint8Array`.
 
 #### Example
 
-Let's try compressing the inline WebAssembly file from this package! Silly,
-I know, but it's an immutable example with a known size.
+Let's try compressing the inline WebAssembly file from this package! Silly, I
+know, but it's an immutable example with a known size.
 
 ```ts
 import { compress } from "@nick/lz4";
@@ -216,9 +216,9 @@ dependencies.
 
 ### Why LZ4?
 
-I've experimented with a few different compression algorithms,
-and while LZ4 may not be the _most_ efficient, the small footprint and fast
-compression and decompression times make it a great choice for many use cases.
+I've experimented with a few different compression algorithms, and while LZ4 may
+not be the _most_ efficient, the small footprint and fast compression and
+decompression times make it a great choice for many use cases.
 
 #### LZ4 vs. Brotli
 
@@ -281,7 +281,6 @@ For additional details, please refer to the [contributing guidelines]. Thanks!
 [contributing guidelines]: https://github.com/nberlette/lz4-wasm/blob/main/.github/CONTRIBUTING.md "Please read the Contributing Guidelines prior to making your first contribution."
 [submitting a pull request]: https://github.com/nberlette/lz4-wasm/compare "Submit a Pull Request on GitHub"
 [LZ4 compression]: https://en.wikipedia.org/wiki/LZ4_compression "Read more about LZ4"
-
 [`esm.sh`]: https://esm.sh "View the esm.sh CDN"
 [`deno.land/x/lz4`]: https://deno.land/x/lz4 "View the original lz4 module that inspired this package on deno.land/x"
 [`lol_alloc`]: https://crates.io/lol_alloc "View the lol_alloc crate on crates.io"
