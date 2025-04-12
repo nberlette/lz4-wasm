@@ -1,6 +1,6 @@
 {
   "name": "@nick/lz4",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "license": "MIT",
   "author": {
     "name": "Nicholas Berlette",
@@ -16,6 +16,6 @@
   },
   "publish": {
     "include": ["**/*.ts", "**/*.js*", "**/*.md", "LICENSE"],
-    "exclude": ["**/.*", "!lib", "**/*.test.*", "**/*.bench.*"]
+    "exclude": ["**/.*", "!lib", "**/*.test.*", "**/*.bench.*", "scripts"]
   }
 }
