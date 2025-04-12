@@ -175,7 +175,7 @@ Continuing with the same example, let's ensure that the decompressed data
 matches the original data passed to the compressor.
 
 ```ts
-import { decompress } from "@nick/lz4";
+import { compress, decompress } from "@nick/lz4";
 
 const data = await fetch(
   "https://jsr.io/@nick/lz4@0.1.0/lib/lz4.js",
@@ -207,7 +207,7 @@ ambitious) goals in mind. I wanted to create a ultra-lightweight compression
 utility that could be used in a variety of runtime environments without any
 dependencies.
 
-- [x] **Reduce** WASM binary size as much as possible - cut in _half_!
+- [x] **Reduce** WASM binary size as much as possible. It's nearly 50% smaller!
 - [x] **Extend** compatibility to support **all** WebAssembly-friendly runtimes
 - [x] **Enable** the `no_std` attribute, emancipating it from rust-std
 - [x] **Switch** to [`lol_alloc`] for lightweight, jovial memory allocation
