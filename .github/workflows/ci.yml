@@ -46,10 +46,10 @@ jobs:
         uses: dsherret/rust-toolchain-file@v1
 
       - name: build wasm
-        run: deno run -Aq jsr:@deno/wasmbuild@0.19.1 --inline
+        run: deno task build
 
       - name: deno test
-        run: deno test -A --no-check=remote --parallel --doc
+        run: deno task test
 
       # only need to run this once
       - if: runner.os == 'Linux'
