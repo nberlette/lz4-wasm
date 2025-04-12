@@ -73,4 +73,4 @@ jobs:
             )
           )
         name: publish to jsr
-        run: deno publish --dry-run && deno publish
+        run: deno publish --dry-run --allow-dirty && deno publish --allow-dirty

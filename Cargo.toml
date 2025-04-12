@@ -1,6 +1,6 @@
 [package]
   name    = "lz4-wasm"
-  version = "0.3.1"
+  version = "0.3.2"
   authors = ["Nick Berlette <nick@berlette.com>"]
   edition = "2024"
 
