@@ -1,8 +1,16 @@
 <div align="center">
 
-# @nick/lz4
+<h1 align="center">
+  <picture align="center" alt="@nick/lz4" width="66%">
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/nberlette/lz4-wasm/main/.github/assets/banner_dark.webp" type="image/webp" />
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/nberlette/lz4-wasm/main/.github/assets/banner_light.webp" type="image/webp" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/nberlette/lz4-wasm/main/.github/assets/banner_dark.png" type="image/png" />
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/nberlette/lz4-wasm/main/.github/assets/banner_light.png" type="image/png" />
+    <img alt="@nick/lz4" src="https://raw.githubusercontent.com/nberlette/lz4-wasm/main/.github/assets/banner_light.png" width="66%" />
+  </picture>
+</h1>
 
-Lightweight LZ4 compression utility powered by WebAssembly.
+**Featherweight [LZ4 compression] with TypeScript and WebAssembly**
 
 </div>
 
