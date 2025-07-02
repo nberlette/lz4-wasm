@@ -1,7 +1,7 @@
 [package]
   name    = "lz4-wasm"
-  version = "0.3.4"
-  authors = ["Nick Berlette <nick@berlette.com>"]
+  version = "0.3.5"
+  authors = ["Nicholas Berlette <nick@berlette.com>"]
   edition = "2024"
 
 [lib]
@@ -17,7 +17,7 @@
   mt         = ["alloc"]
 
 [dependencies]
-  lz4_flex     = { version = "=0.11.3", default-features = false }
+  lz4_flex     = { version = "=0.11.5", default-features = false }
   wasm-bindgen = { version = "=0.2.100", default-features = false }
   lol_alloc    = { version = "=0.4.1", optional = true }
 
