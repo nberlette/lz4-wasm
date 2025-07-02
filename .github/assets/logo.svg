@@ -1,57 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" fill="none" viewBox="0 0 320 320" role="img">
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="256"
+  height="256"
+  fill="none"
+  viewBox="0 0 320 320"
+  role="img"
+>
   <title>@nick/lz4</title>
-  <desc>The fastest non-FFI implementation of LZ4 available, with a footprint size of just 14KB.
+  <desc
+  >The fastest non-FFI implementation of LZ4 available, with a footprint size of just 14KB.
     Compression/decompression speeds >= 1GB/s are a regular occurrence, often maxxing out the CPU cores in trademark LZ4
     fashion. Compatible with any ESM runtime that supports WebAssembly.</desc>
   <rect width="100%" height="100%" fill="#2878D7" rx="33" class="bg"></rect>
-  <g class="fg" fill="#fff" filter="url(#a)" transform="translate(16 16) scale(0.9)">
+  <g
+    class="fg"
+    fill="#fff"
+    filter="url(#a)"
+    transform="translate(16 16) scale(0.9)"
+  >
     <path
-      d="m45.636 159.766-.26 83h60.498999999999995v-26h-34v-140H45.898zM119.875 89.247v12.478l20.395.271 20.395.27-6.436 16.5c-3.54 9.075-7.04 17.85-7.778 19.5s-5.023 12.675-9.523 24.5-11.078 28.661-14.618 37.413l-6.435 15.913v26.674h76v-26h-24.5c-13.475 0-24.5-.172-24.5-.383 0-.21 2.078-5.498 4.618-11.75s9.71-24.417 15.933-40.367 14.492-37.1 18.376-47l7.061-18 .006-11.25.006-11.25h-69z">
+      d="m45.636 159.766-.26 83h60.498999999999995v-26h-34v-140H45.898zM119.875 89.247v12.478l20.395.271 20.395.27-6.436 16.5c-3.54 9.075-7.04 17.85-7.778 19.5s-5.023 12.675-9.523 24.5-11.078 28.661-14.618 37.413l-6.435 15.913v26.674h76v-26h-24.5c-13.475 0-24.5-.172-24.5-.383 0-.21 2.078-5.498 4.618-11.75s9.71-24.417 15.933-40.367 14.492-37.1 18.376-47l7.061-18 .006-11.25.006-11.25h-69z"
+    >
     </path>
-    <path fill-rule="evenodd"
+    <path
+      fill-rule="evenodd"
       d="M231.948 80.493c-1.386 3.885-22.336 54.142-33.68 80.794l-6.393 15.021v27.458h49v39h25v-39h12.066l-.283-11.25-.283-11.25h-11l-.5-52-.5-52-16.041-.273-16.04-.274zm-12.48 86.731c7.796-20.3 17.007-44.703 18.931-50.156 1.009-2.86 2.091-5.04 2.405-4.847.314.194.447 15.471.295 33.949l-.276 33.596h-12.974c-7.136 0-12.974-.131-12.974-.292s2.067-5.673 4.593-12.25"
-      clip-rule="evenodd"></path>
+      clip-rule="evenodd"
+    ></path>
   </g>
   <defs>
     <style>
-      .bg,
-      .fg {
-        transition: fill 0.3s ease;
+    .bg,
+    .fg {
+      transition: fill 0.3s ease;
+    }
+
+    .fg:hover {
+      fill: #fff;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .bg {
+        fill: none;
+        stroke: #fff;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 4%;
+        width: 92%;
+        height: 92%;
+        x: 4%;
+        y: 4%;
       }
 
-      .fg:hover {
+      .fg {
         fill: #fff;
       }
-
-      @media (prefers-color-scheme: dark) {
-        .bg {
-          fill: none;
-          stroke: #fff;
-          stroke-linecap: round;
-          stroke-linejoin: round;
-          stroke-width: 4%;
-          width: 92%;
-          height: 92%;
-          x: 4%;
-          y: 4%;
-        }
-
-        .fg {
-          fill: #fff;
-        }
-      }
+    }
     </style>
-    <filter id="a" width="318.447" height="310.745" x="0" y="10" color-interpolation-filters="sRGB"
-      filterUnits="userSpaceOnUse">
+    <filter
+      id="a"
+      width="318.447"
+      height="310.745"
+      x="0"
+      y="10"
+      color-interpolation-filters="sRGB"
+      filterUnits="userSpaceOnUse"
+    >
       <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
-      <feColorMatrix in="SourceAlpha" result="hardAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0">
+      <feColorMatrix
+        in="SourceAlpha"
+        result="hardAlpha"
+        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+      >
       </feColorMatrix>
       <feOffset dx="4" dy="5"></feOffset>
       <feComposite in2="hardAlpha" operator="out"></feComposite>
-      <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.12 0"></feColorMatrix>
-      <feBlend in2="BackgroundImageFix" result="effect1_dropShadow_53_8"></feBlend>
-      <feBlend in="SourceGraphic" in2="effect1_dropShadow_53_8" result="shape"></feBlend>
+      <feColorMatrix
+        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.12 0"
+      ></feColorMatrix>
+      <feBlend
+        in2="BackgroundImageFix"
+        result="effect1_dropShadow_53_8"
+      ></feBlend>
+      <feBlend
+        in="SourceGraphic"
+        in2="effect1_dropShadow_53_8"
+        result="shape"
+      ></feBlend>
     </filter>
   </defs>
 </svg>
