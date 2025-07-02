@@ -26,3 +26,4 @@
   codegen-units = 1
   opt-level     = "s"     # we build for speed round these parts
   panic         = "abort"
+  strip         = true
