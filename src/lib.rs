@@ -42,7 +42,7 @@ static ALLOCATOR: LockedAllocator<FreeListAllocator> =
 /// Use `decompressRaw` with the `uncompressedSize` parameter, or use the
 /// size-prefixed `compress`/`decompress` functions for simpler usage.
 pub fn compress_raw(input: Box<[u8]>) -> Vec<u8> {
-  ::lz4_flex::block::compress(input.as_ref())
+  ::lz4_flex::block::compress(&input)
 }
 
 #[wasm_bindgen(js_name = decompressRaw)]
@@ -60,7 +60,7 @@ pub fn decompress_raw(
   input: Box<[u8]>,
   uncompressed_size: usize,
 ) -> Result<Vec<u8>, JsValue> {
-  ::lz4_flex::block::decompress(input.as_ref(), uncompressed_size)
+  ::lz4_flex::block::decompress(&input, uncompressed_size)
     .map_err(|e| JsValue::from_str(&e.to_string()))
 }
 
@@ -81,7 +81,7 @@ pub fn decompress_raw(
 /// LZ4 tools (like the `lz4` CLI) that expect standard LZ4 frame format.
 /// Use `compressRaw` for standard LZ4 block format without the size prefix.
 pub fn compress(input: Box<[u8]>) -> Vec<u8> {
-  ::lz4_flex::block::compress_prepend_size(input.as_ref())
+  ::lz4_flex::block::compress_prepend_size(&input)
 }
 
 #[wasm_bindgen]
@@ -97,7 +97,7 @@ pub fn compress(input: Box<[u8]>) -> Vec<u8> {
 /// by `compress`. For standard LZ4 block format data (no size prefix), use
 /// `decompressRaw` with the known uncompressed size.
 pub fn decompress(input: Box<[u8]>) -> Result<Vec<u8>, JsValue> {
-  ::lz4_flex::block::decompress_size_prepended(input.as_ref())
+  ::lz4_flex::block::decompress_size_prepended(&input)
     .map_err(|e| JsValue::from_str(&e.to_string()))
 }
 
