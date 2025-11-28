@@ -113,9 +113,39 @@ projects that may be using different package managers or module loaders.
 
 ## API
 
+This package provides two sets of APIs:
+
+1. **`compress` / `decompress`** - Size-prefixed format (convenient, but
+   non-standard)
+2. **`compressRaw` / `decompressRaw`** - Standard LZ4 block format
+   (interoperable)
+
+### LZ4 Format Overview
+
+> [!IMPORTANT]
+>
+> **Understanding LZ4 Formats**
+>
+> LZ4 has two main formats:
+>
+> - **Block format**: Raw compressed data without framing. The decompressor must
+>   know the uncompressed size beforehand.
+> - **Frame format**: Self-contained format with headers, checksums, and size
+>   information. Used by the `lz4` CLI tool.
+>
+> This library uses **block format** only. Frame format requires `std` support
+> which is not available in our `no_std` WebAssembly build.
+>
+> The default `compress`/`decompress` functions use a **size-prefixed block
+> format** where the first 4 bytes contain the uncompressed size in
+> little-endian. This is convenient but **not compatible** with standard LZ4
+> tools.
+
+---
+
 ### `compress`
 
-Compresses the input data using the LZ4 compression algorithm.
+Compresses data using LZ4 block format with a 4-byte size prefix.
 
 #### Signature
 
@@ -129,12 +159,27 @@ function compress(data: Uint8Array): Uint8Array;
 
 ##### Return
 
-The compressed data, also represented as a `Uint8Array`.
+The compressed data with a 4-byte little-endian size prefix, as a `Uint8Array`.
+
+#### Format Details
+
+The output format is:
+
+```
+[4 bytes: uncompressed size (little-endian)] [LZ4 compressed data]
+```
+
+> [!WARNING]
+>
+> This format is **not compatible** with:
+>
+> - The `lz4` command-line tool (which uses frame format)
+> - Libraries expecting standard LZ4 block format without size prefix
+> - Libraries expecting LZ4 frame format
+>
+> For standard LZ4 block format, use `compressRaw` instead.
 
 #### Example
-
-Let's try compressing the inline WebAssembly file from this package! Silly, I
-know, but it's an immutable example with a known size.
 
 ```ts
 import { compress } from "@nick/lz4";
@@ -153,7 +198,7 @@ console.assert(compressed.length === 9459); // OK
 
 ### `decompress`
 
-Decompresses the input data using the LZ4 decompression algorithm.
+Decompresses data that was compressed with `compress` (size-prefixed format).
 
 #### Signature
 
@@ -164,15 +209,13 @@ function decompress(data: Uint8Array): Uint8Array;
 ##### Params
 
 **`data`** - The compressed data to decompress, represented as a `Uint8Array`.
+Must be in the size-prefixed format produced by `compress`.
 
 ##### Return
 
 The decompressed data, also represented as a `Uint8Array`.
 
 #### Example
-
-Continuing with the same example, let's ensure that the decompressed data
-matches the original data passed to the compressor.
 
 ```ts
 import { compress, decompress } from "@nick/lz4";
@@ -191,6 +234,88 @@ console.assert(decompressed.length === data.length); // OK
 // note that with larger files a check like this would be VERY expensive.
 console.assert(decompressed.every((v, i) => v === data[i])); // OK
 ```
+
+---
+
+### `compressRaw`
+
+Compresses data using standard LZ4 block format (no size prefix).
+
+#### Signature
+
+```ts ignore
+function compressRaw(data: Uint8Array): Uint8Array;
+```
+
+##### Params
+
+**`data`** - The input data to compress, represented as a `Uint8Array`.
+
+##### Return
+
+The compressed data in standard LZ4 block format, as a `Uint8Array`.
+
+#### Format Details
+
+This produces raw LZ4 compressed data conforming to the
+[LZ4 block format specification]. Use this when interoperability with other LZ4
+implementations is required.
+
+> [!NOTE]
+>
+> When decompressing, you **must** know the original uncompressed size. Use
+> `decompressRaw` with the `uncompressedSize` parameter.
+
+#### Example
+
+```ts
+import { compressRaw, decompressRaw } from "@nick/lz4";
+
+const data = new TextEncoder().encode("Hello, World!");
+const originalSize = data.length;
+
+const compressed = compressRaw(data);
+const decompressed = decompressRaw(compressed, originalSize);
+
+console.assert(decompressed.length === data.length); // OK
+```
+
+---
+
+### `decompressRaw`
+
+Decompresses data using standard LZ4 block format (no size prefix).
+
+#### Signature
+
+```ts ignore
+function decompressRaw(data: Uint8Array, uncompressedSize: number): Uint8Array;
+```
+
+##### Params
+
+- **`data`** - The compressed data to decompress, as a `Uint8Array`.
+- **`uncompressedSize`** - The exact size of the original uncompressed data.
+
+##### Return
+
+The decompressed data, also represented as a `Uint8Array`.
+
+#### Example
+
+```ts
+import { compressRaw, decompressRaw } from "@nick/lz4";
+
+const data = new TextEncoder().encode("Hello, World!");
+const originalSize = data.length;
+
+const compressed = compressRaw(data);
+const decompressed = decompressRaw(compressed, originalSize);
+
+console.assert(decompressed.length === data.length); // OK
+```
+
+[LZ4 block format specification]: https://github.com/lz4/lz4/blob/dev/doc/lz4_Block_format.md
 
 ---
 
